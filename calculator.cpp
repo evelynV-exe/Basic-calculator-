@@ -24,3 +24,38 @@ int main() {
     extractExpression();
     calculateF();
 }
+
+void extractExpression() {
+    //going through while loop it it's the end of the expression or not
+    //check if it's a number or operator with isdigit()
+    //add those in the number array or operator array
+    int i = 0;
+    int currentNum = 0;
+
+    while (expression[i] != '\0') {
+        //check the digit or operators with if-else
+        if (isdigit(expression[i])) {
+            currentNum = currentNum * 10 + (expression[i] - '0');
+        } else {
+            numbers[numCount++] = currentNum;
+            operators[opCount++] = expression[i];
+            currentNum = 0;
+        }
+        i++;
+    }
+    
+    numbers[numCount++] = currentNum;
+
+    //for debug
+    printf("Numbers: ");
+    for (int i = 0; i < numCount; i++) {
+        printf("%d ", numbers[i]);
+    }
+
+    printf("\nOperators: ");
+    for (int i = 0; i < opCount; i ++) {
+        printf("%c ", operators[i]);
+    }
+
+    printf("\n");
+}
