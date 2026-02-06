@@ -59,3 +59,62 @@ void extractExpression() {
 
     printf("\n");
 }
+
+void calculateF() {
+    //Have to do * / % first
+    //then continue with + -
+    int i = 0;
+
+    // * / %
+    while (i < opCount) {
+        if (operators[i] == '*' || operators[i] == '/' || operators[i] == '%') {
+            int a = numbers[i];
+            int b = numbers[i + 1];
+            int result;
+
+            if (operators[i] == '*') {
+                result = a * b;
+            } else if (operators[i] == '/') {
+                result = a / b;
+            } else {
+                result = a % b;
+            }
+
+            numbers[i] = result;
+            removeNumber(i+1);
+            removeOperator(i);
+
+            printExpression();
+        } else {
+            i++;
+        }
+    }
+
+    i = 0;
+
+    // + -
+    while (i < opCount) {
+        int a = numbers[i];
+        int b = numbers[i + 1];
+        int tempResult;
+
+        if (operators[i] == '+') {
+            tempResult = a + b;
+        } else{
+            tempResult = a - b;
+        }
+
+        numbers[i] = tempResult;
+        removeNumber(i+1);
+        removeOperator(i);
+
+        printExpression();
+    }
+
+    result = numbers[0];
+    //print out the answer
+
+    printf("-------------------------------\n");
+    printf("Answer: %.2f\n", result);
+    printf("-------------------------------\n");
+}
