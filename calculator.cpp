@@ -74,12 +74,21 @@ void calculateF() {
 
             if (operators[i] == '*') {
                 result = a * b;
-            } else if (operators[i] == '/') {
+            } else if (operators[i] == '/') { //bug fixed
+                if (b == 0) {
+                    printf("Error: divide by zero\n");
+                    return;
+                }
                 result = a / b;
-            } else {
+            } 
+            else if (operators[i] == '%') {
+                if (b == 0) {
+                    printf("Error: modulo by zero\n");
+                    return;
+                }
                 result = a % b;
             }
-
+            
             numbers[i] = result;
             removeNumber(i+1);
             removeOperator(i);
